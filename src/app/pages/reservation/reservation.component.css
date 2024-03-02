@@ -32,9 +32,6 @@ width:100%;
   }
 
 }
-h2 {
-    padding-bottom: 20px;
-}
 
 body {
    
@@ -81,7 +78,7 @@ p {
 }
 
 .container {
-  left: 30%;
+  left: 50%;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -316,27 +313,3 @@ nav ul li ul li a {
 #navbar-toggle.active span:after {
  transform: rotate(-45deg);
 } }
-.parasols {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.ligne {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.parasol {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #000;
-    margin-right: 15px;
-}
-
-.libre {
-    background-color: #aaffaa; /* vert */
-}
-
-.reserve {
-    background-color: #ffaaaa; /* rouge */
-}
