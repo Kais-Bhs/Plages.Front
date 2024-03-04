@@ -1,308 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Manrope:wght@200;400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
-    
-    
-    
-    div.main{
-        background: #0264d6; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    height:calc(100vh);
-    width:100%;
-    }
-    
-    [class*="fontawesome-"]:before {
-      font-family: 'FontAwesome', sans-serif;
-    }
-    
-    /* ---------- GENERAL ---------- */
-    
-    * {
-      box-sizing: border-box;
-        margin:0px auto;
-    
-      &:before,
-      &:after {
-        box-sizing: border-box;
-      }
-    
-    }
-    
-    body {
-       
-        color: #606468;
-      font: 87.5%/1.5em 'Open Sans', sans-serif;
-      margin: 0;
-    }
-    
-    a {
-        color: #eee;
-        text-decoration: none;
-    }
-    
-    a:hover {
-        text-decoration: underline;
-    }
-    
-    input {
-        border: none;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 14px;
-        line-height: 1.5em;
-        padding: 0;
-    }
-    
-    p {
-        line-height: 1.5em;
-    }
-    
-    .clearfix {
-    
-      &:before,
-      &:after {
-        content: ' ';
-        display: table;
-      }
-    
-      &:after {
-        clear: both;
-      }
-    
-    }
-    
-    .container {
-      left: 50%;
-      position: fixed;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-    
-    /* ---------- LOGIN ---------- */
-    
-    #login form{
-        width: 250px;
-    }
-    #login, .logo{
-        display:inline-block;
-        width:40%;
-    }
-    #login{
-    border-right:1px solid #fff;
-      padding: 0px 22px;
-      width: 59%;
-    }
-    .logo{
-    color:#fff;
-    font-size:50px;
-      line-height: 125px;
-    }
-    
-    #login form span.fa {
-        background-color: #fff;
-        border-radius: 3px 0px 0px 3px;
-        color: #000;
-        display: block;
-        float: left;
-        height: 50px;
-        font-size:24px;
-        line-height: 50px;
-        text-align: center;
-        width: 50px;
-    }
-    
-    #login form input {
-        height: 50px;
-    }
-    fieldset{
-        padding:0;
-        border:0;
-        margin: 0;
-    
-    }
-    #login form input[type="text"], input[type="password"] {
-        background-color: #fff;
-        border-radius: 0px 3px 3px 0px;
-        color: #000;
-        margin-bottom: 1em;
-        padding: 0 16px;
-        width: 200px;
-    }
-    
-    #login form input[type="submit"] {
-      border-radius: 3px;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      background-color: #000000;
-      color: #eee;
-      font-weight: bold;
-      /* margin-bottom: 2em; */
-      text-transform: uppercase;
-      padding: 5px 10px;
-      height: 30px;
-    }
-    
-    #login form input[type="submit"]:hover {
-        background-color: #d44179;
-    }
-    
-    #login > p {
-        text-align: center;
-    }
-    
-    #login > p span {
-        padding-left: 5px;
-    }
-    .middle {
-      display: flex;
-      width: 600px;
-    }
- .navigation {
-     height: 55px;
-     background: linear-gradient(45deg, #4199fe, #74b4fe);
+body {
+    background-image: url('../../../assets/beach-background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
 }
- .brand {
-     position: absolute;
-     padding-left: 20px;
-     float: left;
-     line-height: 55px;
-     text-transform: uppercase;
-     font-size: 1.4em;
+
+.nav {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    height: 50px;
+    background-color: #212786;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
- .brand a, .brand a:visited {
-     color: #ffffff;
-     text-decoration: none;
+
+.logo{
+    font-family: 'Cedarville Cursive';
+    font-size: 25px;
 }
- .nav-container {
-     max-width: 1000px;
-     margin: 0 auto;
+
+.nav-button{
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2px 10px;
 }
- nav {
-     float: right;
+.nav-button:hover{
+    cursor: pointer;
+    background-color: #e2e4ff;
+    color: black;
 }
- nav ul {
-     list-style: none;
-     margin: 0;
-     padding: 0;
+
+.login-container{
+    width: 30%;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
- nav ul li {
-     float: left;
-     position: relative;
+
+.title{
+    margin-top: 25px;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
 }
- nav ul li a,nav ul li a:visited {
-     display: block;
-     padding: 0 20px;
-     line-height: 55px;
-     color: #fff;
-     background: #262626 ;
-     text-decoration: none;
+
+.input{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    justify-items: start;
+    width: 50%;
+    margin-top: 50px;
 }
- nav ul li a{
-     background: transparent;
-     color: #FFF;
+
+.login-button{
+    margin: 25px;
 }
- nav ul li a:hover, nav ul li a:visited:hover {
-     background: #2581DC;
-     color: #ffffff;
-}
- .navbar-dropdown li a{
-     background: #2581DC;
-}
- nav ul li a:not(:only-child):after, nav ul li a:visited:not(:only-child):after {
-     padding-left: 4px;
-     content: ' \025BE';
-}
- nav ul li ul li {
-     min-width: 190px;
-}
- nav ul li ul li a {
-     padding: 15px;
-     line-height: 20px;
-}
- .navbar-dropdown {
-     position: absolute;
-     display: none;
-     z-index: 1;
-     background: #fff;
-     box-shadow: 0 0 35px 0 rgba(0,0,0,0.25);
-}
-/* Mobile navigation */
- .nav-mobile {
-     display: none;
-     position: absolute;
-     top: 0;
-     right: 0;
-     background: transparent;
-     height: 55px;
-     width: 70px;
-}
- @media only screen and (max-width: 800px) {
-     .nav-mobile {
-         display: block;
-    }
-     nav {
-         width: 100%;
-         padding: 55px 0 15px;
-    }
-     nav ul {
-         display: none;
-    }
-     nav ul li {
-         float: none;
-    }
-     nav ul li a {
-         padding: 15px;
-         line-height: 20px;
-         background: #262626;
-    }
-     nav ul li ul li a {
-         padding-left: 30px;
-    }
-     .navbar-dropdown {
-         position: static;
-}
- @media screen and (min-width:800px) {
-     .nav-list {
-         display: block !important;
-    }
-}
- #navbar-toggle {
-     position: absolute;
-     left: 18px;
-     top: 15px;
-     cursor: pointer;
-     padding: 10px 35px 16px 0px;
-}
- #navbar-toggle span, #navbar-toggle span:before, #navbar-toggle span:after {
-     cursor: pointer;
-     border-radius: 1px;
-     height: 3px;
-     width: 30px;
-     background: #ffffff;
-     position: absolute;
-     display: block;
-     content: '';
-     transition: all 300ms ease-in-out;
-}
- #navbar-toggle span:before {
-     top: -10px;
-}
- #navbar-toggle span:after {
-     bottom: -10px;
-}
- #navbar-toggle.active span {
-     background-color: transparent;
-}
- #navbar-toggle.active span:before, #navbar-toggle.active span:after {
-     top: 0;
-}
- #navbar-toggle.active span:before {
-     transform: rotate(45deg);
-}
- #navbar-toggle.active span:after {
-     transform: rotate(-45deg);
-} }

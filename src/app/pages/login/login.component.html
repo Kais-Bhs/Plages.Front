@@ -1,65 +1,56 @@
-
-  <div class="nav-container">
-    <div class="brand">
-      <a>PLAGE++</a>
-    </div>
-    <nav>
-      <div class="nav-mobile"><a id="navbar-toggle" href="#!"><span></span></a></div>
-      <ul class="nav-list">
-        <li>
-          <a href="register">S'inscrire</a>
-        </li>
-        <li>
-          <a>FeedBacks</a>
-        <li>
-          <a>Contact</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+<head>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!------ Include the above in your HEAD tag ---------->
-  
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <!-- Include the above in your HEAD tag -->
-  
+  <title>Login</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <div class="main">
-      
-      
-      <div class="container">
-  <div class="middle">
-        <div id="login">
-  
-          <form action="javascript:void(0);" method="get">
-  
-            <fieldset class="clearfix">
-  
-              <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Email Ou Numero Telephone" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-              <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Mot De Passe" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
-              
-               <div>
-                                  <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Mot De passe oublié?</a></span>
-                                  <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Connecter"></span>
-                              </div>
-  
-            </fieldset>
-  <div class="clearfix"></div>
-          </form>
-  
-          <div class="clearfix"></div>
-  
-        </div> <!-- end login -->
-        <div class="logo">PLAGE++
-            
-            <div class="clearfix"></div>
-        </div>
-        
-        </div>
-      </div>
-  
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="logo nav-button">Plage ++</div>
+    <div class="buttons" style="margin-left: auto; display: flex; flex-direction: row; height: 100%;">
+      <div class="login nav-button">Login</div>
+      <div class="register nav-button">S'inscrire</div>
+      <div class="about nav-button">about</div>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <div class="title"> Login </div>
+
+    <div class="input">
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="email" [formControl]="email" required>
+        @if (email.invalid) {
+        <mat-error>{{getErrorMessage()}}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide" style="color: black;">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        @if (password.invalid) {
+        <mat-error>{{getPasswordErrorMessage()}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="login-button">
+      <button mat-icon-button title="Login" color="basic"
+        style="display: flex; justify-content: center;align-items: center; width: 75px; height: 75px;"
+        (click)="processLogin()">
+        <mat-icon style="font-size: 40px; width: fit-content; height: fit-content;">arrow_forward</mat-icon>
+      </button>
+    </div>
+
   </div>
+</body>
