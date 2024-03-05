@@ -1,67 +1,89 @@
-
-<div class="nav-container">
-    <div class="brand">
-      <a>PLAGE++</a>
-    </div>
-    <nav>
-      <div class="nav-mobile"><a id="navbar-toggle" href="#!"><span></span></a></div>
-      <ul class="nav-list">
-        <li>
-          <a href="#!">Se Connecter</a>
-        </li>
-        <li>
-          <a >FeedBacks</a>
-        <li>
-          <a >Contact</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!------ Include the above in your HEAD tag ---------->
-  
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <!-- Include the above in your HEAD tag -->
-  
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <div class="main">
-      
-      
-      <div class="container">
-  <div class="middle">
-        <div id="login">
-  
-          <form action="javascript:void(0);" method="get">
-  
-            <fieldset class="clearfix">
-  
-              <p ><span class="fa fa-user"></span><input type="text"  Placeholder="Nom" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-              <p><span class="fa fa-user"></span><input type="password"  Placeholder="Prenom" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
-              <p ><span class="fa fa-envelope"></span><input type="text"  Placeholder="Email" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-              <p ><span class="fa fa-globe"></span><input type="text"  Placeholder="Pays" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-              <p><span class="fa fa-lock"></span><input type="password"  Placeholder="Mot De Passe" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
-               <div>
-                  
-                                  <span style="width:50%; text-align:right; "><input type="submit" value="S'inscrire"></span>
-                              </div>
-  
-            </fieldset>
-  <div class="clearfix"></div>
-          </form>
-  
-          <div class="clearfix"></div>
-  
-        </div> <!-- end login -->
-        <div class="logo">PLAGE++
-            
-            <div class="clearfix"></div>
-        </div>
-        
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
+          <div *ngIf="username.errors['required']">Username is required</div>
+          <div *ngIf="username.errors['minlength']">
+            Username must be at least 3 characters
+          </div>
+          <div *ngIf="username.errors['maxlength']">
+            Username must be at most 20 characters
+          </div>
         </div>
       </div>
-  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['email']">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign Up</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful!
+    </div>
   </div>
+</div>
