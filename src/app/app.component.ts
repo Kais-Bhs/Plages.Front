@@ -45,9 +45,10 @@ export class AppComponent {
 
   logout(username: any): void {
     this.authService.logout(username).subscribe({
-      next: res => {
+      complete: () => {
         this.storageService.clean();
         this.router.navigate(['/login']);
+
       },
       error: err => {
         console.log(err);
