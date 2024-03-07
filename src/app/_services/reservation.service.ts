@@ -11,7 +11,7 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
-  getParasoles(): Observable<Reservation[]> {
+  getReservations(): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/getall`);
   }
 

@@ -4,9 +4,12 @@
    
 
       <div class="nav-button-home" *ngIf="showAdminBoard" style="margin-right: 25px;">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin</a>
+        <a href="/ListClient" class="nav-link" routerLink="ListClient">Clients</a>
       </div>
-      <div class="nav-button-home" style="margin-right: 25px;">
+      <div class="nav-button-home" *ngIf="showAdminBoard" style="margin-right: 25px;">
+        <a href="/admin" class="nav-link" routerLink="admin">Dashboard</a>
+      </div>
+      <div class="nav-button-home" *ngIf="isLoggedIn && !showAdminBoard" style="margin-right: 25px;">
         <a href="/reservation" class="nav-link" *ngIf="isLoggedIn" routerLink="reservation">Reservations</a>
       </div>
 
@@ -20,7 +23,7 @@
 
 
     <div class="nav-item" *ngIf="isLoggedIn && !showAdminBoard" style="margin-right: 25px;">
-      <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      <a href="/profile" class="nav-link" routerLink="profile">Profile</a>
     </div>
     <div class="nav-item" *ngIf="isLoggedIn">
       <a href class="nav-link" (click)="logout(username)">LogOut</a>

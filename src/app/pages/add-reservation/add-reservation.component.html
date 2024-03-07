@@ -34,7 +34,7 @@
       <div class="form-group">
         <label for="file">File</label>
         <select class="form-control" name="file" [(ngModel)]="selectedFile" (change)="onFileSelected()">
-          <option *ngFor="let file of files$ | async" [value]="file.id">{{ file.numero }}</option>
+          <option *ngFor="let file of files$ | async" [value]="file.id">F{{ file.numero }} , Prix : {{ file.numero }} £/Jour</option>
         </select>
       </div>
       
@@ -42,7 +42,7 @@
       <div class="form-group">
         <label for="parasole">Parasol</label>
         <select class="form-control" name="parasole" [(ngModel)]="reservation.parasole">
-          <option *ngFor="let parasol of parasoles" [value]="parasol.id">{{ parasol.numEmplacement }}</option>
+          <option *ngFor="let parasol of parasoles" [value]="parasol.id">Numero : {{ parasol.numEmplacement }}</option>
         </select>
       </div>
       <div class="form-group">

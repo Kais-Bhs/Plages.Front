@@ -11,7 +11,7 @@ export class User {
   password: string;
   creationDate: Date | undefined;
   token: string | undefined;
-  pays: Pays | undefined;
+  pays?: Pays ;
   reservations: Reservation[] | undefined;
   adresseDeFacturation: string;
   historiqueDeTransaction: string | undefined;
@@ -28,6 +28,7 @@ export class User {
     prenom?: string,
     adresseDeFacturation?: string,
     phone?: number,
+    pays?: Pays
   ) {
     this.username = username;
     this.email = email;
@@ -36,5 +37,6 @@ export class User {
     this.prenom = prenom || '';
     this.adresseDeFacturation = adresseDeFacturation || '';
     this.phone = phone || 0;
+    this.pays =pays
   }
 }

@@ -17,6 +17,7 @@ import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.c
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { ReservationComponent } from './pages/reservation/reservation.component';
 import { AddReservationComponent } from './pages/add-reservation/add-reservation.component';
+import { ListClientComponent } from './pages/list-client/list-client.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AddReservationComponent } from './pages/add-reservation/add-reservation
     ForgetpasswordComponent,
     ResetpasswordComponent,
     ReservationComponent,
-    AddReservationComponent
+    AddReservationComponent,
+    ListClientComponent
   ],
   imports: [
     BrowserModule,
