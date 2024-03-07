@@ -1,18 +1,13 @@
 import { Parasole } from './parasole.model';
+
+import { Reservation } from './reservation.model';
 import { TypeEquipement } from './type-equipement';
 
 export class Equipement {
-  id: number;
-  numEquipement: number;
-  statutEquipement: string;
-  typeEquipement: TypeEquipement;
-  parasole: Parasole;
+  id: number | undefined;
+  numEquipement: number | undefined;
+  statutEquipement: string | undefined;
+  typeEquipement: TypeEquipement | undefined;
+  reservations: Reservation[] | undefined;
 
-  constructor(id: number, numEquipement: number, statutEquipement: string, typeEquipement: TypeEquipement, parasole: Parasole) {
-    this.id = id;
-    this.numEquipement = numEquipement;
-    this.statutEquipement = statutEquipement;
-    this.typeEquipement = typeEquipement;
-    this.parasole = parasole;
-  }
 }

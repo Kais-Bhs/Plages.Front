@@ -1,0 +1,30 @@
+<div class="container">
+  <header class="jumbotron">
+    <h3>
+       Profile
+    </h3>
+  </header>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">
+        <strong>Username:</strong> {{ currentUser.username }}
+      </p>
+      <p class="card-text">
+        <strong>Email:</strong> {{ currentUser.email }}
+      </p>
+      <!-- Ajoutez d'autres champs ici selon vos besoins -->
+      <p class="card-text">
+        <strong>Nom:</strong> {{ currentUser.Id }}
+      </p>
+      <p class="card-text">
+        <strong>Prénom:</strong> {{ currentUser.Prenom }}
+      </p>
+      <p class="card-text">
+        <strong>Adresse de Facturation:</strong> {{ currentUser.AdresseDeFacturation }}
+      </p>
+      <p class="card-text">
+        <strong>Téléphone:</strong> {{ currentUser.Phone }}
+      </p>
+    </div>
+  </div>
+</div>
