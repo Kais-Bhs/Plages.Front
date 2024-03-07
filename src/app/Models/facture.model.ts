@@ -1,6 +1,7 @@
 import { Reservation } from './reservation.model';
 
 export class Facture {
+
   id: number | undefined;
   numFacture: number | undefined;
   nom: string | undefined;
@@ -8,4 +9,5 @@ export class Facture {
   numSiret: number | undefined;
   montant: number | undefined;
   reservation: Reservation | undefined;
+
 }

@@ -1,4 +1,5 @@
 import { Client } from './client.model';
+
 import { Equipement } from './equipement.model';
 import { Facture } from './facture.model';
 import { Parasole } from './parasole.model';
@@ -40,4 +41,5 @@ export class Reservation {
     this.facture = facture;
   }
 }
+
 
