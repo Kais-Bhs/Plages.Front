@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../Models/client.model';
+import { User } from '../Models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  private apiUrl = 'http://localhost:8080'; // Replace 'your-api-url' with your actual API URL
+  private apiUrl = 'http://localhost:8080/api/auth'; // Replace 'your-api-url' with your actual API URL
 
   constructor(private http: HttpClient) { }
 
@@ -25,5 +26,8 @@ export class ClientService {
 
   deleteParasole(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+  getUser(id : any): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/getuser/${id}`);
   }
 }

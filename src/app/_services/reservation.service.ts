@@ -19,11 +19,14 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.apiUrl}/get/${id}`);
   }
 
-  createParasole(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.apiUrl}/add`, reservation);
+  createReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(`${this.apiUrl}/add/`, reservation);
   }
 
   deleteParasole(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+  getReservationByClient(clientId : number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/getbyclient/${clientId}`);
   }
 }

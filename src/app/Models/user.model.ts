@@ -1,8 +1,40 @@
+import { Concession } from "./Concession";
+import { Pays } from "./pays.model";
+import { Reservation } from "./reservation.model";
+import { Role } from "./role.model";
+
 export class User {
-  id: number | undefined;
-  nom: string | undefined;
-  prenom: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
-  username: string | undefined;
+  username: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  password: string;
+  creationDate: Date | undefined;
+  token: string | undefined;
+  pays: Pays | undefined;
+  reservations: Reservation[] | undefined;
+  adresseDeFacturation: string;
+  historiqueDeTransaction: string | undefined;
+  concession: Concession | undefined;
+  phone: number;
+  tokenCreationDate: Date | undefined;
+  roles: Role[] | undefined;
+
+  constructor(
+    username: string,
+    email: string,
+    password: string,
+    nom?: string,
+    prenom?: string,
+    adresseDeFacturation?: string,
+    phone?: number,
+  ) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.nom = nom || '';
+    this.prenom = prenom || '';
+    this.adresseDeFacturation = adresseDeFacturation || '';
+    this.phone = phone || 0;
+  }
 }

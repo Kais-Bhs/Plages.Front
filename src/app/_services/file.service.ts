@@ -11,7 +11,7 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  getParasoles(): Observable<File[]> {
+  getFiles(): Observable<File[]> {
     return this.http.get<File[]>(`${this.apiUrl}/getall`);
   }
 

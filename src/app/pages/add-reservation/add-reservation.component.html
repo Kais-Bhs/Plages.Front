@@ -1,0 +1,77 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <h2>Ajouter une réservation</h2>
+    <form
+      name="form"
+      (ngSubmit)="onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="dateDebut">Date de début</label>
+        <input
+          type="date"
+          class="form-control"
+          name="dateDebut"
+          [(ngModel)]="reservation.dateDebut"
+          required
+          #dateDebut="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && dateDebut.errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="dateFin">Date de fin</label>
+        <input
+          type="date"
+          class="form-control"
+          name="dateFin"
+          [(ngModel)]="reservation.dateFin"
+          required
+          #dateFin="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && dateFin.errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="file">File</label>
+        <select class="form-control" name="file" [(ngModel)]="selectedFile" (change)="onFileSelected()">
+          <option *ngFor="let file of files$ | async" [value]="file.id">{{ file.numero }}</option>
+        </select>
+      </div>
+      
+      <!-- Champs pour la sélection du parasol -->
+      <div class="form-group">
+        <label for="parasole">Parasol</label>
+        <select class="form-control" name="parasole" [(ngModel)]="reservation.parasole">
+          <option *ngFor="let parasol of parasoles" [value]="parasol.id">{{ parasol.numEmplacement }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="equipements">Équipements</label>
+        <select class="form-control" name="equipements" [(ngModel)]="reservation.equipements">
+          <option value="LIT">Lit</option>
+          <option value="DEUXLITS">Deux Lits</option>
+          <option value="PARASOLE">Parasole</option>
+          <option value="DeuxFauteils">Deux Fauteuils</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="remarque">Remarque</label>
+        <textarea
+          class="form-control"
+          name="remarque"
+          [(ngModel)]="reservation.remarque"
+          #remarque="ngModel"
+        ></textarea>
+      </div>
+      <!-- Ajoutez d'autres champs pour les données de réservation au besoin -->
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Ajouter la réservation
+        </button>
+      </div>
+    </form>
+
+    <!-- Ajouter un message de succès après l'ajout de la réservation si nécessaire -->
+  </div>
+</div>

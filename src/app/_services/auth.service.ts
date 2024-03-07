@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Client } from '../Models/client.model';
+import { User } from '../Models/user.model';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
 
@@ -24,18 +26,17 @@ export class AuthService {
       httpOptions
     );
   }
-
-  register(username: string, email: string, password: string): Observable<any> {
+  storeClientId(clientId: number): void {
+    localStorage.setItem('clientId', clientId.toString());
+  }
+  register(client : Client): Observable<any> {
     return this.http.post(
       AUTH_API + 'signup',
-      {
-        username,
-        email,
-        password,
-      },
+      client,
       httpOptions
     );
   }
+  
 
   logout(username: any): Observable<any> {
     return this.http.post(AUTH_API + 'signout/' + username, { }, httpOptions);

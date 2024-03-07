@@ -26,4 +26,7 @@ export class ParasoleService {
   deleteParasole(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
+  getParasoleByFileId(fileId : any ) : Observable<Parasole[]> {
+    return this.http.get<Parasole[]>(`${this.apiUrl}/getParasoleByFileId/${fileId}`);
+  }
 }

@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Reservation } from '../../Models/reservation.model';
+import { ReservationService } from '../../_services/reservation.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-reservation',
-  standalone: true,
-  imports: [],
   templateUrl: './reservation.component.html',
-  styleUrl: './reservation.component.css'
+  styleUrls: ['./reservation.component.css']
 })
-export class ReservationComponent {
-  
+export class ReservationComponent implements OnInit {
+  reservations: Reservation[] = [];
+  clientId: number | null = null;
+
+  constructor(
+    private reservationService: ReservationService,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+    const clientId = localStorage.getItem('clientId');
+    if (clientId) {
+      this.clientId = parseInt(clientId, 10);
+      this.loadReservations();
+    } else {
+      console.error('ID du client non disponible');
+    }
+  }
+
+  loadReservations() {
+    if (this.clientId !== null) {
+      this.reservationService.getReservationByClient(this.clientId).subscribe(reservations => {
+        this.reservations = reservations;
+      });
+    } else {
+      console.error('ID du client non défini');
+    }
+  }
 }

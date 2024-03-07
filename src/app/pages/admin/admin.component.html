@@ -1,359 +1,49 @@
-<div class="test">
-
-
-  <div class="nav-container">
-    <div class="brand">
-      <a>PLAGE++</a>
+<div class="dashboard-container">
+  <div class="sidebar">
+ 
+    <div class="side-item" (click)="selectItem('parasols')"
+      [ngStyle]="{ 'background-color': selectedItem === 'parasols' ? 'white' : '', 'color': selectedItem === 'parasols' ? 'black' : '' }">
+      <span>Parasols</span>
     </div>
-    <nav>
-      <div class="nav-mobile"><a id="navbar-toggle" href="#!"><span></span></a></div>
-      <ul class="nav-list">
-        <li>
-          <a href="#!">Se Deconnecter</a>
-        </li>
-        <li>
-          <a >FeedBacks</a>
-        <li>
-          <a >Contact</a>
-        </li>
-      </ul>
-    </nav>
+ 
+    <div class="side-item" (click)="selectItem('clients')"
+      [ngStyle]="{ 'background-color': selectedItem === 'clients' ? 'white' : '', 'color': selectedItem === 'clients' ? 'black' : '' }">
+      <span>Clients</span>
+    </div>
+ 
+    <div class="side-item" (click)="selectItem('equipements')"
+      [ngStyle]="{ 'background-color': selectedItem === 'equipements' ? 'white' : '', 'color': selectedItem === 'equipements' ? 'black' : '' }">
+      <span>Equipement</span>
+    </div>
+ 
   </div>
-  
-      
-     
-    <div class="main">
-    
-      <div class="container">
-  
-        <div class="middle">
-  
-          <div class="parasols">
-            <h2>Les Parasols : </h2>
-            <div class="ligne">
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol reserve"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol reserve"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-                <div class="parasol libre"></div>
-            </div>
-            <div class="ligne">
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol reserve"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol libre"></div>
-              <div class="parasol reserve"></div>
+ 
+  <div class="main-content">
+ 
+    <div class="parasols-container" *ngIf="this.selectedItem === 'parasols'">
+ 
+      <div class="filters-container">
+ 
+        <div class="date">
+          <label for="dob">Choisir la date:</label><br>
+          <input type="date" name="dob" id="dob" [formControl]="dateReservation"
+            style="width: 100%; height: 40px; border-radius: 5px; border: none;">
+        </div>
+ 
+      </div>
+ 
+      <div class="files-container">
+        <div *ngFor="let file of files" class="file">
+ 
+          <div *ngFor="let parasol of file.parasoles" class="parasol"
+            [title]="parasol.numEmplacement + 'F' + file.numero"
+            [ngStyle]="{ 'background-color': isConfirmed(parasol) ? 'yellow' : '' }" (click)="openDialog(file, parasol)">
+            {{ 'P' }}
           </div>
-          <div class="ligne">
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol reserve"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-            <div class="parasol libre"></div>
-        </div>
-        <div class="ligne">
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-          <div class="parasol libre"></div>
-      </div>
-      <div class="ligne">
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-        <div class="parasol libre"></div>
-    </div>
-    <div class="ligne">
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-      <div class="parasol libre"></div>
-  </div>
-  <div class="ligne">
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-  </div>
-  <div class="ligne">
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol reserve"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-    <div class="parasol libre"></div>
-  </div>
-  
-        </div>
+ 
         </div>
       </div>
     </div>
-    
-    
+ 
+  </div>
+</div>

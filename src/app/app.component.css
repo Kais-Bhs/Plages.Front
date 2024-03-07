@@ -9,10 +9,6 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    justify-items: center;
 }
 
 .navigation {

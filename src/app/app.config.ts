@@ -15,6 +15,8 @@ import { BoardUserComponent } from './pages/board-user/board-user.component';
 import { httpInterceptorProviders } from './pages/_helpers/http.interceptor';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
+import { ReservationComponent } from './pages/reservation/reservation.component';
+import { AddReservationComponent } from './pages/add-reservation/add-reservation.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
     BoardAdminComponent,
     BoardUserComponent,
     ForgetpasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    ReservationComponent,
+    AddReservationComponent
   ],
   imports: [
     BrowserModule,

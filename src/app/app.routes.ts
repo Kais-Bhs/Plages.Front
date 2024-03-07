@@ -11,6 +11,7 @@ import { BoardAdminComponent } from './pages/board-admin/board-admin.component';
 import {ForgetpasswordComponent} from "./pages/forgetpassword/forgetpassword.component";
 import {ResetpasswordComponent} from "./pages/resetpassword/resetpassword.component";
 import { NgModule } from '@angular/core';
+import { AddReservationComponent } from './pages/add-reservation/add-reservation.component';
 export const routes: Routes = [
  {
     path:'login',
@@ -21,10 +22,6 @@ export const routes: Routes = [
     component:HomeComponent
  },
  {
-    path:'reservation',
-    component:ReservationComponent
- },
- {
     path:'admin',
     component:AdminComponent
  },
@@ -33,9 +30,12 @@ export const routes: Routes = [
  { path: 'forgetpassword', component: ForgetpasswordComponent },
  { path: 'resetpassword', component: ResetpasswordComponent },
  { path: 'profile', component: ProfileComponent },
- { path: 'client', component: BoardUserComponent },
+ { path: 'reservation', component: ReservationComponent },
  { path: 'admin', component: BoardAdminComponent },
- { path: '', redirectTo: 'home', pathMatch: 'full' }
+ { path: 'AddRservation', component : AddReservationComponent },
+ {
+   path: '' ,redirectTo:'login' , pathMatch:'full'
+},
 ];
 @NgModule({
    imports: [RouterModule.forRoot(routes)],
