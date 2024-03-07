@@ -1,3 +1,4 @@
+
 import { Concession } from './Concession';
 import { Parasole } from './parasole.model';
 
@@ -7,4 +8,5 @@ export class File {
   prixJournalier?: number | undefined;
   parasoles?: Parasole[] ;
   concession?: Concession | undefined;
+
 }

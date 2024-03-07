@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -44,3 +45,4 @@ import { ListClientComponent } from './pages/list-client/list-client.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

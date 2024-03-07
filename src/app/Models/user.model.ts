@@ -1,3 +1,4 @@
+
 import { Concession } from "./Concession";
 import { Pays } from "./pays.model";
 import { Reservation } from "./reservation.model";
@@ -40,3 +41,4 @@ export class User {
     this.pays =pays
   }
 }
+

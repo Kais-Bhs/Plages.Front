@@ -36,6 +36,7 @@ export const routes: Routes = [
  { path: 'AddRservation', component : AddReservationComponent },
  { path: 'ListClient', component : ListClientComponent },
  {
+
    path: '' ,redirectTo:'login' , pathMatch:'full'
 },
 ];
@@ -44,3 +45,4 @@ export const routes: Routes = [
    exports: [RouterModule]
  })
  export class AppRoutingModule { }
+
