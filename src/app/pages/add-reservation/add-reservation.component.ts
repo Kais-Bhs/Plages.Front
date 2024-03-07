@@ -42,6 +42,7 @@ export class AddReservationComponent {
   onSubmit(): void {
     this.reservation.user = this.storageService.getUser();
     this.reservation.statut = Statut.NONCONFIRMED ;
+    console.log(this.reservation);
     this.reservationService.createReservation(this.reservation).subscribe({
       next: data => {
         console.log(data);

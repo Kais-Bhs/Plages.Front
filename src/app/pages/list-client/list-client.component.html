@@ -1,0 +1,31 @@
+<div class="ListClient">
+<h2>Liste des clients</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Email</th>
+      <th>Pays</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.nom }}</td>
+      <td>{{ user.prenom }}</td>
+      <td>
+        {{ user.email }}
+      </td>
+      <td>
+        {{ user.pays }}
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-primary">Ajouter un client</button>
+</div>

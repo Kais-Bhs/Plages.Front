@@ -12,6 +12,7 @@ import {ForgetpasswordComponent} from "./pages/forgetpassword/forgetpassword.com
 import {ResetpasswordComponent} from "./pages/resetpassword/resetpassword.component";
 import { NgModule } from '@angular/core';
 import { AddReservationComponent } from './pages/add-reservation/add-reservation.component';
+import { ListClientComponent } from './pages/list-client/list-client.component';
 export const routes: Routes = [
  {
     path:'login',
@@ -33,6 +34,7 @@ export const routes: Routes = [
  { path: 'reservation', component: ReservationComponent },
  { path: 'admin', component: BoardAdminComponent },
  { path: 'AddRservation', component : AddReservationComponent },
+ { path: 'ListClient', component : ListClientComponent },
  {
 
    path: '' ,redirectTo:'login' , pathMatch:'full'

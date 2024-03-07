@@ -30,4 +30,7 @@ export class ClientService {
   getUser(id : any): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/getuser/${id}`);
   }
+  getAllUsers(nom : String) : Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/getallUser/${nom}`) ;
+  }
 }

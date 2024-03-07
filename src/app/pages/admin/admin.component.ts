@@ -18,6 +18,7 @@ import { ParasoleDialogComponent } from '../../parasole-dialog/parasole-dialog.c
 import { User } from '../../Models/user.model';
 import { Concession } from '../../Models/Concession';
 import { TypeEquipement } from '../../Models/type-equipement';
+import { ReservationService } from '../../_services/reservation.service';
  
 @Component({
   selector: 'app-admin',
@@ -28,13 +29,13 @@ import { TypeEquipement } from '../../Models/type-equipement';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  selectedItem: string = 'clients';
+  selectedItem: string = 'parasols';
   files: File[] = [];
   parasols: Parasole[] = [];
   reservations: Reservation[] = [];
   dateReservation: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
   selectedReservation!: Reservation;
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog,private reservationService : ReservationService){}
  
  
   ngOnInit(): void {
@@ -75,6 +76,20 @@ export class AdminComponent {
       //);
       //this.reservationParasols.push(reservationParasole);
    // }
+
+   this.reservationService.getReservations()
+      .subscribe({next: data => {
+        this.reservations = [];
+        data.forEach(element => {
+          this.reservations.push(element);
+        });
+      },
+      error: err =>{
+        console.log(err.message);
+      }}
+      );
+ 
+      console.log(this.reservations);
   }
  
  
@@ -85,7 +100,7 @@ export class AdminComponent {
   isConfirmed(parasol: Parasole): boolean {
     if (this.dateReservation.value?.length > 0) {
       return this.reservations.some(reservationP => 
-        reservationP.parasole?.id === parasol.id &&
+        reservationP.parasole?.numEmplacement === parasol.numEmplacement &&
         reservationP.statut === Statut.CONFIRMED &&
         reservationP.dateDebut !== undefined &&
         reservationP.dateFin !== undefined &&
@@ -113,9 +128,9 @@ export class AdminComponent {
   openDialog(file: File, parasol: Parasole): void {
     let isConfirmed = this.isConfirmed(parasol);
  
-    let user = this.getUserForParasolAndDate(parasol)?.user;
+    
     let reservation = this.getUserForParasolAndDate(parasol);
- 
+    let user = reservation?.user;
     const dialogRef = this.dialog.open(ParasoleDialogComponent, {
       width: '50%',
       data: { file, parasol, isConfirmed, user, reservation }
