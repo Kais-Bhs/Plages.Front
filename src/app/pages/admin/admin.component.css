@@ -40,8 +40,8 @@
 }
  
 .main-content {
-  width: 88%;
-  height: 90%;
+  width: 180vh;
+  height: 70vh;
   margin-top: 60px;
   top: 60px;
   background-color: rgba(5, 255, 255, 0.2);
