@@ -14,7 +14,9 @@ export class FileService {
   getFiles(): Observable<File[]> {
     return this.http.get<File[]>(`${this.apiUrl}/getall`);
   }
-
+  getFilesByConcessionId(id : number): Observable<File[]> {
+    return this.http.get<File[]>(`${this.apiUrl}/getFilesbyConcessionId/${id}`);
+  }
   getParasole(id: number): Observable<File> {
     return this.http.get<File>(`${this.apiUrl}/get/${id}`);
   }

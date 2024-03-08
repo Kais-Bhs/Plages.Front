@@ -9,6 +9,12 @@ import { File } from '../../Models/file.model';
 import { User } from '../../Models/user.model';
 import { StorageService } from '../../_services/storage.service';
 import { Statut } from '../../Models/statut';
+import { Concession } from '../../Models/Concession';
+import { ConcessionService } from '../../_services/Concession.service';
+import { ReservationParasole } from '../../Models/reservation-parasole.model';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AddReservationParasoleDialogComponentComponent } from '../../add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
 
 @Component({
   selector: 'app-add-reservation',
@@ -17,35 +23,65 @@ import { Statut } from '../../Models/statut';
 })
 export class AddReservationComponent {
   reservation: Reservation = new Reservation();
-  // Liste des parasols
-  selectedFile: number | null = null;
-  parasoles: Parasole[] = [];
-  files$: Observable<File[]>;
+  
+  reservationsParasoles: ReservationParasole[] = [];
+  
+  selectedConcession: number | null = null;
+  concessions$: Observable<Concession[]>;
+ 
+  files: File[] = [];
   errorMessage = '';
 
-  constructor(private parasolService: ParasoleService, private reservationService: ReservationService, private fileService: FileService,private storageService : StorageService) {
-    this.files$ = this.fileService.getFiles();
+  constructor(private router: Router,private dialog: MatDialog, private reservationService: ReservationService, private fileService: FileService,private storageService : StorageService,private concessionService : ConcessionService) {
+    this.concessions$ = this.concessionService.getAllConcession();
   }
 
-  onFileSelected(): void {
-    if (this.selectedFile) {
-      this.parasolService.getParasoleByFileId(this.selectedFile).subscribe(parasoles => {
-        this.parasoles = parasoles;
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(AddReservationParasoleDialogComponentComponent, {
+      width: '400px', // Définissez la largeur de votre dialogue
+      data: { files : this.files } // Envoyez les parasols à votre dialogue
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reservationsParasoles.push(result);
+      }
+    });
+  }
+  removeReservationParasole(index: number) {
+    this.reservationsParasoles.splice(index, 1);
+  }
+  onConcessionSelected(): void {
+    if (this.selectedConcession) {
+      this.fileService.getFilesByConcessionId(this.selectedConcession).subscribe(files => {
+        this.files = files;
       });
     } else {
-      this.parasoles = [];
+      this.files = [];
     }
   }
+ 
 
 
 
   onSubmit(): void {
-    this.reservation.user = this.storageService.getUser();
+    this.reservation.reservationParasoles = this.reservationsParasoles;
+    const clientId = localStorage.getItem('clientId');
+    if (clientId) {
+      const client = new User();
+    client.id = parseInt(clientId, 10); // Assurez-vous que l'ID est correctement converti en nombre
+
+    // Assignez l'objet User à la propriété client de la réservation
+    this.reservation.client = client;
+    } else {
+      console.error('ID du client non disponible');
+    }
     this.reservation.statut = Statut.NONCONFIRMED ;
     console.log(this.reservation);
     this.reservationService.createReservation(this.reservation).subscribe({
       next: data => {
         console.log(data);
+        this.router.navigate(['/reservation']);
       },
       error: err => {
         this.errorMessage = err.error.message;

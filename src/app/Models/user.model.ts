@@ -5,32 +5,35 @@ import { Reservation } from "./reservation.model";
 import { Role } from "./role.model";
 
 export class User {
-  username: string;
-  nom: string;
-  prenom: string;
-  email: string;
-  password: string;
-  creationDate: Date | undefined;
-  token: string | undefined;
+  id?: number;
+  username?: string;
+  nom?: string;
+  prenom?: string;
+  email?: string;
+  password?: string;
+  creationDate?: Date;
+  token?: string;
   pays?: Pays ;
-  reservations: Reservation[] | undefined;
-  adresseDeFacturation: string;
-  historiqueDeTransaction: string | undefined;
-  concession: Concession | undefined;
-  phone: number;
-  tokenCreationDate: Date | undefined;
-  roles: Role[] | undefined;
+  reservations?: Reservation[] ;
+  adresseDeFacturation?: string;
+  historiqueDeTransaction?: string ;
+  concession?: Concession ;
+  phone?: number;
+  tokenCreationDate?: Date ;
+  roles?: Role[] ;
 
   constructor(
-    username: string,
-    email: string,
-    password: string,
+    id?: number,
+    username?: string,
+    email?: string,
+    password?: string,
     nom?: string,
     prenom?: string,
     adresseDeFacturation?: string,
     phone?: number,
     pays?: Pays
   ) {
+    this.id = id
     this.username = username;
     this.email = email;
     this.password = password;

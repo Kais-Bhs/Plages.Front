@@ -12,20 +12,18 @@ export class Reservation {
   id?: number;
   dateDebut?: string ;
   dateFin?: string ;
-  parasole?: Parasole ;
   remarque?: string;
-  equipements: TypeEquipement | undefined;
-  user: User | undefined;
-  statut: Statut | undefined;
+  reservationParasoles?: ReservationParasole[];
+  client?: User;
+  statut?: Statut ;
   facture?: Facture;
 
   constructor(
     id?: number,
     dateDebut?: string,
     dateFin?: string,
-    parasole?: Parasole,
     remarque?: string,
-    equipements?: TypeEquipement,
+    reservationParasoles?: ReservationParasole[],
     client?: User,
     statut?: Statut,
     facture?: Facture
@@ -33,10 +31,9 @@ export class Reservation {
     this.id = id;
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
-    this.parasole = parasole;
     this.remarque = remarque;
-    this.equipements = equipements;
-    this.user = client;
+    this.reservationParasoles = reservationParasoles;
+    this.client = client;
     this.statut = statut;
     this.facture = facture;
   }
