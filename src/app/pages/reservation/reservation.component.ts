@@ -36,4 +36,14 @@ export class ReservationComponent implements OnInit {
       console.error('ID du client non défini');
     }
   }
+  OnDelete(id? : number): void {
+
+      this.reservationService.deleteReservation(id).subscribe();
+      this.reloadPage();
+  
+} 
+reloadPage(): void {
+  window.location.reload();
+}
+
 }

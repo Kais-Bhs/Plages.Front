@@ -15,6 +15,7 @@ import { ReservationParasole } from '../../Models/reservation-parasole.model';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddReservationParasoleDialogComponentComponent } from '../../add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
+import { TypeEquipement } from '../../Models/type-equipement';
 
 @Component({
   selector: 'app-add-reservation',
@@ -23,7 +24,10 @@ import { AddReservationParasoleDialogComponentComponent } from '../../add-reserv
 })
 export class AddReservationComponent {
   reservation: Reservation = new Reservation();
-  
+
+public TypeEquipement = TypeEquipement;
+
+
   reservationsParasoles: ReservationParasole[] = [];
   
   selectedConcession: number | null = null;
@@ -45,9 +49,11 @@ export class AddReservationComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.reservationsParasoles.push(result);
+        console.log(this.reservationsParasoles);
       }
     });
   }
+  
   removeReservationParasole(index: number) {
     this.reservationsParasoles.splice(index, 1);
   }

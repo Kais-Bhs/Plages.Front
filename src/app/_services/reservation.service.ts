@@ -25,7 +25,7 @@ export class ReservationService {
     return this.http.post<Reservation>(`${this.apiUrl}/add/`, reservation ,httpOptions);
   }
 
-  deleteParasole(id: number): Observable<void> {
+  deleteReservation(id?: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
   getReservationByClient(clientId : number): Observable<Reservation[]> {

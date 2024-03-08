@@ -23,7 +23,7 @@
           <i class="bi bi-x-circle-fill text-danger"></i> <!-- Icône de non-confirmation -->
         </span>
       </td>
-      <td><button type="button" class="btn btn-danger" [routerLink]="['/AddRservation']">Annuler</button>
+      <td><button type="button" class="btn btn-danger" (click)="OnDelete(reservation.id)">Annuler</button>
       </td>
     </tr>
   </tbody>
