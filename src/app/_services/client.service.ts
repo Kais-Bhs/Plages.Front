@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../Models/client.model';
 import { User } from '../Models/user.model';
+import { ERole } from '../Models/ERole';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class ClientService {
   getUser(id : any): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/getuser/${id}`);
   }
-  getAllUsers(nom : String) : Observable<User[]> {
+  getAllUsers(nom : ERole) : Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/getallUser/${nom}`) ;
   }
 }

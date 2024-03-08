@@ -100,7 +100,6 @@ export class AdminComponent {
   isConfirmed(parasol: Parasole): boolean {
     if (this.dateReservation.value?.length > 0) {
       return this.reservations.some(reservationP => 
-        reservationP.parasole?.numEmplacement === parasol.numEmplacement &&
         reservationP.statut === Statut.CONFIRMED &&
         reservationP.dateDebut !== undefined &&
         reservationP.dateFin !== undefined &&
@@ -115,7 +114,6 @@ export class AdminComponent {
   getUserForParasolAndDate(parasol: Parasole): Reservation | undefined {
     if (this.dateReservation.value?.length > 0) {
       return this.reservations.find(reservationP =>
-        reservationP.parasole?.id === parasol.id &&
         reservationP.statut === Statut.CONFIRMED &&
         reservationP.dateDebut !== undefined &&
         reservationP.dateFin !== undefined &&
@@ -130,7 +128,7 @@ export class AdminComponent {
  
     
     let reservation = this.getUserForParasolAndDate(parasol);
-    let user = reservation?.user;
+    let user = reservation?.client;
     const dialogRef = this.dialog.open(ParasoleDialogComponent, {
       width: '50%',
       data: { file, parasol, isConfirmed, user, reservation }
