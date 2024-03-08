@@ -1,15 +1,16 @@
 import { Client } from './client.model';
+import { User } from './user.model';
 
 export class LienParente {
-  id: number;
-  nom: string;
-  reduction: number;
-  client: Client;
+  Id?: number;
+  TypeDeparente?: string;
+  Client?: User;
+  Concession? : User ;
 
-  constructor(id: number, nom: string, reduction: number, client: Client) {
-    this.id = id;
-    this.nom = nom;
-    this.reduction = reduction;
-    this.client = client;
+  constructor(id?: number, nom?: string, client?: User,concession? : User) {
+    this.Id = id;
+    this.TypeDeparente = nom;
+    this.Client = client;
+    this.Concession = concession ;
   }
 }

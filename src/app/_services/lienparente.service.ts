@@ -7,7 +7,7 @@ import { LienParente } from '../Models/lien-parente.model';
   providedIn: 'root'
 })
 export class LienParenteService {
-  private apiUrl = 'http://localhost:8080/lienparentes'; // Replace 'your-api-url' with your actual API URL
+  private apiUrl = 'http://localhost:8080/lienParentes'; // Replace 'your-api-url' with your actual API URL
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +19,8 @@ export class LienParenteService {
     return this.http.get<LienParente>(`${this.apiUrl}/get/${id}`);
   }
 
-  createParasole(lienParente: LienParente): Observable<LienParente> {
-    return this.http.post<LienParente>(`${this.apiUrl}/add`, lienParente);
+  createLienParente(lienParente: LienParente): Observable<LienParente> {
+    return this.http.post<LienParente>(`${this.apiUrl}/add/`, lienParente);
   }
 
   deleteParasole(id: number): Observable<void> {

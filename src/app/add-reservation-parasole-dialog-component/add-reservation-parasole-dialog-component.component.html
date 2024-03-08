@@ -9,16 +9,16 @@
   <div class="form-group">
     <label for="parasole">Parasol</label>
     <select class="form-control" name="parasole" [(ngModel)]="selectedParasole">
-      <option *ngFor="let parasol of parasoles" [value]="parasol">{{ parasol.numEmplacement }}</option>
+      <option *ngFor="let parasol of parasoles" [value]="parasol.id">{{ parasol.numEmplacement }}</option>
     </select>
   </div>
   <div class="form-group">
     <label for="equipement">Équipement</label>
     <select class="form-control" name="equipement" [(ngModel)]="selectedEquipement">
-      <option value="LIT">Lit</option>
-      <option value="DEUXLITS">Deux Lits</option>
-      <option value="Fauteuil">Fauteuil</option>
-      <option value="DeuxFauteils">Deux Fauteuils</option>
+      <option value="lit">Lit</option>
+      <option value="deux_lits">Deux Lits</option>
+      <option value="fauteuil">Fauteuil</option>
+      <option value="deux_fauteuils">Deux Fauteuils</option>
     </select>
   </div>
 </div>

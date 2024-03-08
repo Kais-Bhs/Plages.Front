@@ -1,8 +1,8 @@
 export enum TypeEquipement {
-    LIT = 'lit',
+    lit = 'lit',
 
-    DEUXLITS = 'deux_lits',
-    Fauteuil = 'fauteuil,',
-    DeuxFauteils = 'deux_fauteuils'
+    deux_lits = 'deux_lits',
+    fauteuil = 'fauteuil,',
+    deux_fauteuils = 'deux_fauteuils'
 
 }

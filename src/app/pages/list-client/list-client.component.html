@@ -9,6 +9,7 @@
       <th>Prenom</th>
       <th>Email</th>
       <th>Pays</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +23,9 @@
       <td>
         {{ user.pays }}
       </td>
-      
+      <td>
+        <button type="button" class="btn btn-success" (click)="openAddDialog(user.id)">Ajouter Lien De Parente</button>
+      </td>
     </tr>
   </tbody>
 </table>
