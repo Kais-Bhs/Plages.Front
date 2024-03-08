@@ -69,9 +69,7 @@ export class AddReservationComponent {
     const clientId = localStorage.getItem('clientId');
     if (clientId) {
       const client = new User();
-    client.id = parseInt(clientId, 10); // Assurez-vous que l'ID est correctement converti en nombre
-
-    // Assignez l'objet User à la propriété client de la réservation
+    client.id = parseInt(clientId, 10); 
     this.reservation.client = client;
     } else {
       console.error('ID du client non disponible');

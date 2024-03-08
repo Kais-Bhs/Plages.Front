@@ -28,6 +28,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    margin-left: 75%;
 }
 
 #brand {

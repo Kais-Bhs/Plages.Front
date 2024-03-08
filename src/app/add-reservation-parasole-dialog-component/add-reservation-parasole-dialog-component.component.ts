@@ -10,10 +10,11 @@ import { ParasoleService } from '../_services/parasole.service';
   styleUrl: './add-reservation-parasole-dialog-component.component.css'
 })
 export class AddReservationParasoleDialogComponentComponent {
-  selectedParasole: Parasole | null = null;
+  selectedParasole: number | null = null;
   selectedEquipement: string | null = null;
   selectedFile: number | null = null;
   parasoles: Parasole[] = [];
+  parasole : Parasole = new Parasole();
 
   constructor(private parasolService: ParasoleService,
     public dialogRef: MatDialogRef<AddReservationParasoleDialogComponentComponent>,
@@ -21,8 +22,14 @@ export class AddReservationParasoleDialogComponentComponent {
   ) { }
 
   onReserve(): void {
-    if (this.selectedParasole && this.selectedEquipement) {
-      this.dialogRef.close({ parasoleId: this.selectedParasole.id, equipement: this.selectedEquipement });
+    if (this.selectedParasole && this.selectedEquipement) { 
+      console.log(this.selectedParasole)
+      this.parasolService.getParasole(this.selectedParasole).subscribe(parasole => {
+        this.parasole = parasole;
+        console.log(this.parasole);
+        this.dialogRef.close({ parasole: this.parasole, equipement: this.selectedEquipement });
+      });
+   
     }
   }
   onFileSelected(): void {
