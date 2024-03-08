@@ -50,11 +50,12 @@
               <th>Equipement</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let reservation of reservationsParasoles">
-              <td>{{ reservation.equipements }}</td>
-              <td>{{ reservation.equipements }}</td>
-              <td>{{ reservation.equipements }}</td>     
+          <tbody >
+            <tr *ngFor="let reservation of reservationsParasoles" >
+              <td>{{ reservation.parasole?.file?.numero }}</td>
+              <td>{{ reservation.parasole?.numEmplacement }}</td>
+              <td>{{ reservation?.equipements }}
+              </td>     
               <td><i class="bi bi-trash" (click)="removeReservationParasole(reservation.id)"></i></td>        
             </tr>
           </tbody>
