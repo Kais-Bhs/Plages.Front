@@ -14,8 +14,9 @@ import { ConcessionService } from '../../_services/Concession.service';
 import { ReservationParasole } from '../../Models/reservation-parasole.model';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AddReservationParasoleDialogComponentComponent } from '../../add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
+import { AddReservationParasoleDialogComponentComponent } from '../add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
 import { TypeEquipement } from '../../Models/type-equipement';
+import { CalculeFactureComponent } from '../calcule-facture/calcule-facture.component';
 
 @Component({
   selector: 'app-add-reservation',
@@ -53,7 +54,22 @@ public TypeEquipement = TypeEquipement;
       }
     });
   }
-  
+  openFactureDialog(): void {
+    this.reservation.reservationParasoles = this.reservationsParasoles;
+    const clientId = localStorage.getItem('clientId');
+    if (clientId) {
+      const client = new User();
+    client.id = parseInt(clientId, 10); 
+    this.reservation.client = client;
+    } else {
+      console.error('ID du client non disponible');
+    }
+    this.reservation.statut = Statut.NONCONFIRMED ;
+    const dialogRef = this.dialog.open(CalculeFactureComponent, {
+      width: '600px', // Définissez la largeur de votre dialogue
+      data: { reservation : this.reservation } // Envoyez les parasols à votre dialogue
+    });
+  }
   removeReservationParasole(index: number) {
     this.reservationsParasoles.splice(index, 1);
   }
@@ -65,31 +81,5 @@ public TypeEquipement = TypeEquipement;
     } else {
       this.files = [];
     }
-  }
- 
-
-
-
-  onSubmit(): void {
-    this.reservation.reservationParasoles = this.reservationsParasoles;
-    const clientId = localStorage.getItem('clientId');
-    if (clientId) {
-      const client = new User();
-    client.id = parseInt(clientId, 10); 
-    this.reservation.client = client;
-    } else {
-      console.error('ID du client non disponible');
-    }
-    this.reservation.statut = Statut.NONCONFIRMED ;
-    console.log(this.reservation);
-    this.reservationService.createReservation(this.reservation).subscribe({
-      next: data => {
-        console.log(data);
-        this.router.navigate(['/reservation']);
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-      }
-    });
   }
 }

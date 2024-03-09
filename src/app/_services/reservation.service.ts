@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reservation } from '../Models/reservation.model';
+import { Facture } from '../Models/facture.model';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -30,5 +31,9 @@ export class ReservationService {
   }
   getReservationByClient(clientId : number): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/getbyclient/${clientId}`);
+  }
+
+  calculMontant(reservation : Reservation): Observable<Facture> {
+    return this.http.post<Facture>(`${this.apiUrl}/calculMontant`, reservation ,httpOptions);
   }
 }

@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ParasoleDialogComponent } from '../../parasole-dialog/parasole-dialog.component';
+import { ParasoleDialogComponent } from '../parasole-dialog/parasole-dialog.component';
 import { User } from '../../Models/user.model';
 import { Concession } from '../../Models/Concession';
 import { TypeEquipement } from '../../Models/type-equipement';

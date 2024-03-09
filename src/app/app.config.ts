@@ -19,7 +19,7 @@ import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.comp
 import { ReservationComponent } from './pages/reservation/reservation.component';
 import { AddReservationComponent } from './pages/add-reservation/add-reservation.component';
 import { ListClientComponent } from './pages/list-client/list-client.component';
-import { AddReservationParasoleDialogComponentComponent } from './add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
+import { AddReservationParasoleDialogComponentComponent } from './pages/add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddLienParenteComponent } from './pages/add-lien-parente/add-lien-parente.component';
 

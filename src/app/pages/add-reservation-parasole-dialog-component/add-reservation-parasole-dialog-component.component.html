@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="file">File</label>
         <select class="form-control" name="file" [(ngModel)]="selectedFile" (change)="onFileSelected()">
-          <option *ngFor="let file of data.files" [value]="file.id">F{{ file.numero }} , Prix : {{ file.prixJournalier }} £/Jour</option>
+          <option *ngFor="let file of data.files" [value]="file.id">F{{ file.numero }} , Prix : {{ file.prixJournalier }} €/Jour</option>
         </select>
       </div>
   <div class="form-group">
