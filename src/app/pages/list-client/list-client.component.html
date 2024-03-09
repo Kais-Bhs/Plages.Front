@@ -21,7 +21,7 @@
         {{ user.email }}
       </td>
       <td>
-        {{ user.pays }}
+        {{ user.pays?.nom }}
       </td>
       <td>
         <button type="button" class="btn btn-success" (click)="openAddDialog(user.id)">Ajouter Lien De Parente</button>

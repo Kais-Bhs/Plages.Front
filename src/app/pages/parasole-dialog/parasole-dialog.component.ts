@@ -2,12 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Parasole } from '../Models/parasole.model';
-import { File } from '../Models/file.model';
+import { Parasole } from '../../Models/parasole.model';
+import { File } from '../../Models/file.model';
 import { CommonModule } from '@angular/common';
-import { User } from '../Models/user.model';
+import { User } from '../../Models/user.model';
 import { FormsModule } from '@angular/forms';
-import { Reservation } from '../Models/reservation.model';
+import { Reservation } from '../../Models/reservation.model';
  
  
  

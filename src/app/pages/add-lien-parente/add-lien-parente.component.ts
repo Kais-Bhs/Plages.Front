@@ -25,15 +25,9 @@ export class AddLienParenteComponent {
     @Inject(MAT_DIALOG_DATA) public data: { id : number }) {  }
 
   ngOnInit(): void {
-    this.loadClients();
   }
 
-  loadClients() {
-      this.clientService.getAllUsers(ERole.ROLE_ADMIN).subscribe(users => {
-        this.users = users;
-      });
 
-  }
 
   onSubmit(): void {
     const clientId = localStorage.getItem('clientId');

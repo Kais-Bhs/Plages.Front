@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { Parasole } from '../Models/parasole.model';
+import { Parasole } from '../../Models/parasole.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { File } from '../Models/file.model';
-import { ParasoleService } from '../_services/parasole.service';
+import { File } from '../../Models/file.model';
+import { ParasoleService } from '../../_services/parasole.service';
 
 @Component({
   selector: 'app-add-reservation-parasole-dialog-component',
