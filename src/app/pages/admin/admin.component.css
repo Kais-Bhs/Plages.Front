@@ -1,120 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Manrope:wght@200;400&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
- 
-.dashboard-container {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(5, 255, 255, 0.2);
- 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
- 
-.sidebar {
-  position: absolute;
-  top: 60px;
-  left: 0px;
-  height: 70.7rem;
-  width: 12%;
-  background-color: #a79bb6;
-}
- 
-.side-item {
-  width: 98%;
-  height: fit-content;
-  color: white;
-  background-color: inherit;
-  font-size: 24px;
-  padding-left: 15%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 25px;
-  font-family: 'Manrope';
-  transition: background-color 0.1s ease, color 0.1s ease;
-}
- 
-.side-item:hover {
-  background-color: white;
-  color: black;
-  cursor: pointer;
-}
- 
-.main-content {
-  width: 180vh;
-  height: 70vh;
-  margin-top: 60px;
-  top: 60px;
-  background-color: rgba(5, 255, 255, 0.2);
-  margin-left: auto;
-  border-radius: 5px;
+.beach {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  align-content: center;
+  padding-top: 20px;
 }
- 
-.parasols-container {
-  width: 98%;
-  height: 98%;
+
+.row {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  align-content: center;
   justify-content: center;
-  border-radius: 5px;
-  background-image: url(../../../../assets/images/beach-top.png);
-}
- 
-.files-container{
-  height: 67%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
-  align-content: center;
-  margin-top: auto;
-  margin-bottom: 10px;
+  margin-bottom: 30px; /* Espacement entre les lignes */
 }
- 
-.file {
-  height: fit-content;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
- 
-.filters-container {
-  margin-top: 25px;
-  margin-bottom: auto;
-  width: 95%;
-  height: 10%;
-  background-color: rgba(255, 255, 255, 0.5);
-}
- 
+
 .parasol {
-  width: 35px;
-  height: 35px;
-  margin: auto;
-  text-align: center;
-  border: 1px solid blue;
-  border-radius: 5px;
-  background-color: white;
+  width: 30px; /* Largeur d'une parasole */
+  height: 30px; /* Hauteur d'une parasole */
+  margin-right: 5px; /* Espacement entre les parasoles */
+  background-color: rgb(226, 215, 215); /* Couleur de base pour une parasole */
+  border: 1px solid #000; /* Bordure de la parasole */
+  border-radius: 50%; /* Forme arrondie pour simuler une parasole */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Ombre pour simuler la profondeur */
 }
- 
-.parasol:hover {
-  cursor: pointer;
-  background-color: #62a7df;
-  color: black;
+.confirmed {
+  background-color: #066906; /* Couleur verte pour les parasols confirmés */
 }
+
+.non-confirmed {
+  background-color: #f8f85d; /* Couleur jaune pour les parasols non confirmés */
+}
+
  
 .date{
   width: 20%;

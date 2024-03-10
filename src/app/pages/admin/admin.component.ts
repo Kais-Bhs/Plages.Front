@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ParasoleDialogComponent } from '../parasole-dialog/parasole-dialog.component';
@@ -19,124 +19,117 @@ import { User } from '../../Models/user.model';
 import { Concession } from '../../Models/Concession';
 import { TypeEquipement } from '../../Models/type-equipement';
 import { ReservationService } from '../../_services/reservation.service';
- 
+import { FileService } from '../../_services/file.service';
+import { StorageService } from '../../_services/storage.service';
+import { ConcessionService } from '../../_services/Concession.service';
+import { ParasoleService } from '../../_services/parasole.service';
+import { switchMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { ReservationDetailsDialogComponent } from '../reservation-details-dialog/reservation-details-dialog.component';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  selectedItem: string = 'parasols';
   files: File[] = [];
-  parasols: Parasole[] = [];
+  concession: Concession = new Concession();
+  selectedConcession: number | null = null;
+  parasolMap: any[][] = [];
   reservations: Reservation[] = [];
-  dateReservation: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
-  selectedReservation!: Reservation;
-  constructor(private dialog: MatDialog,private reservationService : ReservationService){}
- 
- 
-  ngOnInit(): void {
- 
-    // Generate a random number between 0 and 1
-    const random = Math.floor(Math.random() * 2);
- 
-    // Use the random number to select the statut value
-    const statut = random === 0 ? Statut.CONFIRMED : Statut.NONCONFIRMED;
- 
-    for (let j = 0; j < 8; j++) {
-      this.files[j] = { id: j + 1, numero: j + 1, prixJournalier: j + 10, concession: new Concession(), parasoles: [] }; // Initialize this.files[j] as an object with a parasoles property
-      for (let i = 0; i < 36; i++) {
-        const parasol = new Parasole(
-          i + 1, // id
-          i + 1, // numEmplacement
-          'statut', // statut
-          [], // equipements (empty array)
-          new File(), // file
-          [] // reservationParasoles (empty array)
-        );
-        this.files[j].parasoles?.push(parasol);
+  selectedDate: Date = new Date();
+
+onDateChange() {
+  this.loadReservations();
+}
+  constructor(private dialog: MatDialog,private reservationService :  ReservationService,private parasoleService: ParasoleService, private concessionService: ConcessionService, private fileService: FileService, private storageService: StorageService) {
+    this.loadParasol();
+  }
+
+  // Fonction pour charger les parasols de chaque fille et les organiser dans une grille
+  loadParasol() {
+    const clientId = localStorage.getItem('clientId');
+    if (clientId) {
+      this.concessionService.GetConcessionByConsionnaireId(parseInt(clientId, 10))
+        .pipe(
+          switchMap(concession => {
+            this.concession = concession;
+            if(this.concession.id != null) {}
+            return this.fileService.getFilesByConcessionId(this.concession.id || 0); 
+          } ),
+          switchMap(files => {
+            this.files = files;
+            const observables = files.map(file => this.parasoleService.getParasoleByFileId(file.id));
+            return forkJoin(observables);
+          })
+        )
+        .subscribe(parasolsArrays => {
+          parasolsArrays.forEach((parasols, i) => {
+            this.parasolMap[i] = [];
+            for (let j = 0; j < 36; j++) {
+              if (parasols[j]) {
+                this.parasolMap[i][j] = parasols[j];
+              } else {
+                this.parasolMap[i][j] = null;
+              }
+            }
+          });
+        });
+    }
+  }
+  loadReservations() {
+    this.reservationService.getbydatedebut(this.selectedDate).subscribe(reservations => {
+      this.reservations = reservations;
+    });
+}
+
+isConfirmed(rowIndex: number, colIndex: number): boolean {
+  const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
+  return this.reservations.some(reservation =>
+    reservation.reservationParasoles?.some(reservationParasole =>
+      reservationParasole.parasole?.id === parasolId &&
+      reservation.statut === Statut.CONFIRMED
+    )
+  );
+}
+findReservation(rowIndex: number, colIndex: number): any {
+  for (const reservation of this.reservations) {
+    if(reservation.reservationParasoles != null){
+    for (const reservationParasole of reservation.reservationParasoles) {
+      if (reservationParasole.parasole?.id === this.parasolMap[rowIndex][colIndex]?.id) {
+        return reservation;
       }
     }
- 
-      //for (let i = 0; i < 36; i++) {
-      // Generate a random number between 0 and 1
-     // const random = Math.floor(Math.random() * 2);
- 
-      // Use the random number to select the statut value
-     // const statut = random === 0 ? Statut.CONFIRMED : Statut.NONCONFIRMED;
-     // const reservationParasole = new ReservationParasole(
-      //  i + 1, // id
-      //  i + 1, // nbLit
-       // i + 1, // nbFauteuil
-       // new Reservation(i + 1, '2024-03-05', '2024-03-09',  this.files[1].parasoles[i],"none",TypeEquipement.DEUXLITS, new User('Pierre', 'Montblanc','pm@gmail.com'), statut, new Facture()), // reservation
-      //  this.files[1].parasoles[i] // parasole
-      //);
-      //this.reservationParasols.push(reservationParasole);
-   // }
+  } 
+  return null;
+}
+}
+isNonConfirmed(rowIndex: number, colIndex: number): boolean {
+  const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
+  return this.reservations.some(reservation =>
+    reservation.reservationParasoles?.some(reservationParasole =>
+      reservationParasole.parasole?.id === parasolId &&
+      reservation.statut === Statut.NONCONFIRMED
+    )
+  );
+}
+showReservationDetails(rowIndex: number, colIndex: number) {
+  const reservation = this.findReservation(rowIndex,colIndex);
+  if (reservation) {
+    const dialogRef = this.dialog.open(ReservationDetailsDialogComponent, {
+      width: '700px',
+      data: { reservation }
+    });
 
-   this.reservationService.getReservations()
-      .subscribe({next: data => {
-        this.reservations = [];
-        data.forEach(element => {
-          this.reservations.push(element);
-        });
-      },
-      error: err =>{
-        console.log(err.message);
-      }}
-      );
- 
-      console.log(this.reservations);
-  }
- 
- 
-  selectItem(item: string): void {
-    this.selectedItem = item;
-  }
- 
-  isConfirmed(parasol: Parasole): boolean {
-    if (this.dateReservation.value?.length > 0) {
-      return this.reservations.some(reservationP => 
-        reservationP.statut === Statut.CONFIRMED &&
-        reservationP.dateDebut !== undefined &&
-        reservationP.dateFin !== undefined &&
-        this.dateReservation.value >= reservationP.dateDebut &&
-        this.dateReservation.value <= reservationP.dateFin
-      );
-    }
-    return false;
-  }
-  
- 
-  getUserForParasolAndDate(parasol: Parasole): Reservation | undefined {
-    if (this.dateReservation.value?.length > 0) {
-      return this.reservations.find(reservationP =>
-        reservationP.statut === Statut.CONFIRMED &&
-        reservationP.dateDebut !== undefined &&
-        reservationP.dateFin !== undefined &&
-        this.dateReservation.value >= reservationP.dateDebut &&
-        this.dateReservation.value <= reservationP.dateFin);
-    }
-    return undefined;
-}
- 
-  openDialog(file: File, parasol: Parasole): void {
-    let isConfirmed = this.isConfirmed(parasol);
- 
-    
-    let reservation = this.getUserForParasolAndDate(parasol);
-    let user = reservation?.client;
-    const dialogRef = this.dialog.open(ParasoleDialogComponent, {
-      width: '50%',
-      data: { file, parasol, isConfirmed, user, reservation }
-    });
- 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('Dialogue fermé');
     });
+  } else {
+    console.log('Aucune réservation trouvée pour cette parasol.');
   }
- 
 }
+}
+

@@ -22,6 +22,7 @@ import { ListClientComponent } from './pages/list-client/list-client.component';
 import { AddReservationParasoleDialogComponentComponent } from './pages/add-reservation-parasole-dialog-component/add-reservation-parasole-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddLienParenteComponent } from './pages/add-lien-parente/add-lien-parente.component';
+import { ReservationDetailsDialogComponent } from './pages/reservation-details-dialog/reservation-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AddLienParenteComponent } from './pages/add-lien-parente/add-lien-paren
     AddReservationComponent,
     ListClientComponent,
     AddReservationParasoleDialogComponentComponent,
-    AddLienParenteComponent
+    AddLienParenteComponent,
+    ReservationDetailsDialogComponent
   ],
   imports: [
     BrowserModule,

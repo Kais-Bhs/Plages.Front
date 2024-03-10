@@ -15,7 +15,9 @@ export class ConcessionService {
     return this.http.get<Concession[]>(`${this.apiUrl}/getall`);
   }
 
-
+  GetConcessionByConsionnaireId(id : number) : Observable<Concession> {
+    return this.http.get<Concession>(`${this.apiUrl}/GetConcessionByConsionnaireId/${id}`);
+  }
 
   deleteParasole(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
