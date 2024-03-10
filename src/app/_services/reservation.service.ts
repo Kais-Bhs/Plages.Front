@@ -36,4 +36,10 @@ export class ReservationService {
   calculMontant(reservation : Reservation): Observable<Facture> {
     return this.http.post<Facture>(`${this.apiUrl}/calculMontant`, reservation ,httpOptions);
   }
+  getbydatedebut(date : Date): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/getbydatedebut/${date}`);
+  }
+  update(reservation : Reservation) :  Observable<Reservation> {
+    return this.http.put<Reservation>(`${this.apiUrl}/update/`,reservation,httpOptions);
+  }
 }

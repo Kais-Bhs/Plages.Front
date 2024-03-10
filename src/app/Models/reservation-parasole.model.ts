@@ -4,7 +4,7 @@ import { TypeEquipement } from './type-equipement';
 
 export class ReservationParasole {
   id : number;
-  equipements?: TypeEquipement
+  equipements?: TypeEquipement;
   reservation?: Reservation;
   parasole?: Parasole;
 
