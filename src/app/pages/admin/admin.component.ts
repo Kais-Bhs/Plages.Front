@@ -26,6 +26,9 @@ import { ParasoleService } from '../../_services/parasole.service';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { ReservationDetailsDialogComponent } from '../reservation-details-dialog/reservation-details-dialog.component';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -34,6 +37,7 @@ import { ReservationDetailsDialogComponent } from '../reservation-details-dialog
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
+
 export class AdminComponent {
   files: File[] = [];
   concession: Concession = new Concession();
@@ -42,10 +46,10 @@ export class AdminComponent {
   reservations: Reservation[] = [];
   selectedDate: Date = new Date();
 
-onDateChange() {
-  this.loadReservations();
-}
-  constructor(private dialog: MatDialog,private reservationService :  ReservationService,private parasoleService: ParasoleService, private concessionService: ConcessionService, private fileService: FileService, private storageService: StorageService) {
+  onDateChange() {
+    this.loadReservations();
+  }
+  constructor(private router: Router, private dialog: MatDialog, private reservationService: ReservationService, private parasoleService: ParasoleService, private concessionService: ConcessionService, private fileService: FileService, private storageService: StorageService) {
     this.loadParasol();
   }
 
@@ -57,9 +61,9 @@ onDateChange() {
         .pipe(
           switchMap(concession => {
             this.concession = concession;
-            if(this.concession.id != null) {}
-            return this.fileService.getFilesByConcessionId(this.concession.id || 0); 
-          } ),
+            if (this.concession.id != null) { }
+            return this.fileService.getFilesByConcessionId(this.concession.id || 0);
+          }),
           switchMap(files => {
             this.files = files;
             const observables = files.map(file => this.parasoleService.getParasoleByFileId(file.id));
@@ -84,52 +88,58 @@ onDateChange() {
     this.reservationService.getbydatedebut(this.selectedDate).subscribe(reservations => {
       this.reservations = reservations;
     });
-}
-
-isConfirmed(rowIndex: number, colIndex: number): boolean {
-  const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
-  return this.reservations.some(reservation =>
-    reservation.reservationParasoles?.some(reservationParasole =>
-      reservationParasole.parasole?.id === parasolId &&
-      reservation.statut === Statut.CONFIRMED
-    )
-  );
-}
-findReservation(rowIndex: number, colIndex: number): any {
-  for (const reservation of this.reservations) {
-    if(reservation.reservationParasoles != null){
-    for (const reservationParasole of reservation.reservationParasoles) {
-      if (reservationParasole.parasole?.id === this.parasolMap[rowIndex][colIndex]?.id) {
-        return reservation;
-      }
-    }
-  } 
-  return null;
-}
-}
-isNonConfirmed(rowIndex: number, colIndex: number): boolean {
-  const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
-  return this.reservations.some(reservation =>
-    reservation.reservationParasoles?.some(reservationParasole =>
-      reservationParasole.parasole?.id === parasolId &&
-      reservation.statut === Statut.NONCONFIRMED
-    )
-  );
-}
-showReservationDetails(rowIndex: number, colIndex: number) {
-  const reservation = this.findReservation(rowIndex,colIndex);
-  if (reservation) {
-    const dialogRef = this.dialog.open(ReservationDetailsDialogComponent, {
-      width: '700px',
-      data: { reservation }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialogue fermé');
-    });
-  } else {
-    console.log('Aucune réservation trouvée pour cette parasol.');
   }
-}
+
+  isConfirmed(rowIndex: number, colIndex: number): boolean {
+    const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
+    return this.reservations.some(reservation =>
+      reservation.reservationParasoles?.some(reservationParasole =>
+        reservationParasole.parasole?.id === parasolId &&
+        reservation.statut === Statut.CONFIRMED
+      )
+    );
+  }
+
+  findReservation(rowIndex: number, colIndex: number): any {
+    for (const reservation of this.reservations) {
+      if (reservation.reservationParasoles != null) {
+        for (const reservationParasole of reservation.reservationParasoles) {
+          if (reservationParasole.parasole?.id === this.parasolMap[rowIndex][colIndex]?.id) {
+            return reservation;
+          }
+        }
+      }
+      return null;
+    }
+  }
+
+  isNonConfirmed(rowIndex: number, colIndex: number): boolean {
+    const parasolId = this.parasolMap[rowIndex][colIndex]?.id;
+    return this.reservations.some(reservation =>
+      reservation.reservationParasoles?.some(reservationParasole =>
+        reservationParasole.parasole?.id === parasolId &&
+        reservation.statut === Statut.NONCONFIRMED
+      )
+    );
+  }
+
+  showReservationDetails(rowIndex: number, colIndex: number) {
+    let reservation = this.findReservation(rowIndex, colIndex);
+    if (reservation) {
+      const dialogRef = this.dialog.open(ReservationDetailsDialogComponent, {
+        width: '700px',
+        data: { reservation }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        reservation = result.reservation;
+        this.reservationService.update(reservation).subscribe();
+      });
+
+    }
+    else {
+      console.log('Aucune réservation trouvée pour cette parasol.');
+    }
+  }
 }
 

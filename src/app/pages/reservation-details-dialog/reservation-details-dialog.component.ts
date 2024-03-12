@@ -11,17 +11,28 @@ import { Statut } from '../../Models/statut';
   styleUrl: './reservation-details-dialog.component.css'
 })
 export class ReservationDetailsDialogComponent {
-  constructor(private router: Router,private reservationService : ReservationService,
+
+  constructor(private router: Router, private reservationService: ReservationService,
     public dialogRef: MatDialogRef<ReservationDetailsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { reservation :Reservation }
+    @Inject(MAT_DIALOG_DATA) public data: { reservation: Reservation }
   ) { }
-  OnDelete(id? : number): void {
+
+  OnDelete(id?: number): void {
 
     this.reservationService.deleteReservation(id).subscribe();
     this.router.navigate(['/reservation']);
 
-}
-changeStatus() : void {
-this.data.reservation.statut = Statut.CONFIRMED;
-}
+  }
+
+  changeStatus(): void {
+    if (this.data.reservation.statut == Statut.NONCONFIRMED) {
+      this.data.reservation.statut = Statut.CONFIRMED;
+    }
+    else {
+      this.data.reservation.statut = Statut.NONCONFIRMED;
+    }
+    
+    this.dialogRef.close({ reservation: this.data.reservation }); // Emitting the result here  }
+  }
+
 }

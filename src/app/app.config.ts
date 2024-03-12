@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -30,7 +29,6 @@ import { ReservationDetailsDialogComponent } from './pages/reservation-details-d
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
     ForgetpasswordComponent,
@@ -48,6 +46,7 @@ import { ReservationDetailsDialogComponent } from './pages/reservation-details-d
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    ProfileComponent
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
